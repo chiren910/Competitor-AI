@@ -1,0 +1,11 @@
+# apps:
+#     - name: Competitor_Analysis-Ai-Agent
+#       restart_delay: 100
+#       script: python3 Competitor_Analysis_Ai_Agent\main.py
+#       autorestart: true
+
+apps:
+    - name: competitor_analysis-ai-agent-backend
+      restart_delay: 100
+      script: python3 ./main.py
+      autorestart: true

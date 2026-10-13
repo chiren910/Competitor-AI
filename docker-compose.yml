@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  competitor_analysis_ai_agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my-python-app
+    ports:
+      - "4545:4545"
+    environment:
+      - PYTHONPATH=/app
+      - CHROME_FLAGS=--headless --disable-gpu --no-sandbox --disable-dev-shm-usage --disable-software-rasterizer
+    volumes:
+      - .:/app
+    restart: unless-stopped

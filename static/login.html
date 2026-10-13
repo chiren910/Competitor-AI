@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitor AI — Sign In</title>
+    <meta name="description" content="Access the Next-Gen AI Competitor Intelligence & Market Analysis Console.">
+    <!-- Google Fonts per Spec: Bricolage Grotesque, DM Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="auth-page-body">
+    <div class="auth-card-centered">
+        <!-- Logo & Header -->
+        <div class="auth-header-top">
+            <div class="auth-logo-mark">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </div>
+            <h1 class="auth-title">Competitor AI</h1>
+            <p class="auth-subtitle">Autonomous Strategic Intelligence Console</p>
+        </div>
+
+        <!-- Auth Tabs Switcher -->
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab-btn active" id="tabLoginBtn">Sign In</button>
+            <button type="button" class="auth-tab-btn" id="tabSignupBtn">Create Account</button>
+        </div>
+
+        <!-- Toast / Alert Message Box -->
+        <div class="auth-alert" id="authAlert" style="display: none;">
+            <div class="auth-alert-icon" id="authAlertIcon"></div>
+            <div class="auth-alert-text" id="authAlertText"></div>
+        </div>
+
+        <!-- FORM 1: LOGIN -->
+        <form id="loginForm" class="auth-form active">
+            <div class="form-group">
+                <label for="loginEmail" class="form-label">Email Address</label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <input type="email" id="loginEmail" placeholder="analyst@enterprise.ai" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label-row">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <span class="helper-text">Min. 6 chars</span>
+                </div>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <input type="password" id="loginPassword" placeholder="••••••••••••" required autocomplete="current-password">
+                    <button type="button" class="toggle-pwd-btn" data-target="loginPassword" title="Show/Hide Password">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <label class="remember-label">
+                    <input type="checkbox" id="rememberMe" checked>
+                    <span>Remember session</span>
+                </label>
+            </div>
+
+            <button type="submit" id="loginSubmitBtn" class="btn-primary auth-submit-btn">
+                <span class="btn-text">Sign In to Console &rarr;</span>
+                <div class="spinner" id="loginSpinner" style="display: none;"></div>
+            </button>
+
+            <div class="auth-divider">
+                <span>OR FAST TRACK</span>
+            </div>
+
+            <!-- Quick 1-Click Demo Login -->
+            <button type="button" id="quickDemoBtn" class="btn-demo-quick">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span>1-Click Analyst Access (demo@competitor.ai)</span>
+            </button>
+        </form>
+
+        <!-- FORM 2: SIGNUP -->
+        <form id="signupForm" class="auth-form" style="display: none;">
+            <div class="form-group">
+                <label for="signupFullName" class="form-label">Full Name</label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input type="text" id="signupFullName" placeholder="Sarah Mitchell" required autocomplete="name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupCompany" class="form-label">Company <span class="optional-tag">(Optional)</span></label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                    </svg>
+                    <input type="text" id="signupCompany" placeholder="Apex Ventures" autocomplete="organization">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupEmail" class="form-label">Business Email</label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <input type="email" id="signupEmail" placeholder="sarah@apex.com" required autocomplete="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupPassword" class="form-label">Password</label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <input type="password" id="signupPassword" placeholder="Min 6 characters" required autocomplete="new-password">
+                    <button type="button" class="toggle-pwd-btn" data-target="signupPassword" title="Show/Hide Password">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                <div class="auth-input-wrapper">
+                    <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required autocomplete="new-password">
+                </div>
+            </div>
+
+            <button type="submit" id="signupSubmitBtn" class="btn-primary auth-submit-btn">
+                <span class="btn-text">Create Account & Enter &rarr;</span>
+                <div class="spinner" id="signupSpinner" style="display: none;"></div>
+            </button>
+        </form>
+
+        <div class="auth-footer-note">
+            <span>Protected by Encrypted Sessions</span>
+        </div>
+    </div>
+
+    <!-- Auth Script -->
+    <script src="/static/auth.js"></script>
+</body>
+</html>

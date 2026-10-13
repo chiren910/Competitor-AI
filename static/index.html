@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitor AI — Autonomous Intelligence Console</title>
+    <meta name="description" content="AI-driven competitive intelligence dashboard powered by Google Gemini and Crawl4AI.">
+    <!-- Google Fonts per Spec: Bricolage Grotesque, DM Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css?v=3">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- Left Sidebar (Collapsible / Expandable) -->
+        <aside class="app-sidebar" id="appSidebar">
+            <!-- Sidebar Header / Brand + Expand Toggle -->
+            <div class="sidebar-header">
+                <div class="sidebar-brand-wrapper" id="sidebarBrandWrap" title="Competitor AI">
+                    <div class="sidebar-brand-mark">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="sidebar-brand-text">
+                        <span class="sidebar-brand-name">Competitor AI</span>
+                        <span class="sidebar-brand-sub">STRATEGIC INTEL</span>
+                    </div>
+                </div>
+                <button type="button" class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar (Expand / Collapse)" aria-label="Toggle Sidebar">
+                    <svg class="toggle-icon-collapse" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <svg class="toggle-icon-expand" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <button type="button" class="sidebar-icon-btn active" id="sidebarHomeBtn" title="Scan Engine / Intelligence Recon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span class="sidebar-btn-label">Scan Engine</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-overview" title="Company Overview">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span class="sidebar-btn-label">Company Overview</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-market" title="Market & Share">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <span class="sidebar-btn-label">Market & Share</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-competitors" title="Competitor Landscape">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                        <path d="M2 12h20"></path>
+                    </svg>
+                    <span class="sidebar-btn-label">Competitor Landscape</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-swot" title="SWOT Analysis">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span class="sidebar-btn-label">SWOT Analysis</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-comparison" title="Comparison Matrix">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                        <line x1="9" y1="21" x2="9" y2="9"></line>
+                    </svg>
+                    <span class="sidebar-btn-label">Comparison Matrix</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-surpass" title="Surpass Strategy">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span class="sidebar-btn-label">Surpass Strategy</span>
+                </button>
+
+                <button type="button" class="sidebar-icon-btn tab-btn" data-tab="tab-logs" title="Live Stream Feed">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="4 17 10 11 4 5"></polyline>
+                        <line x1="12" y1="19" x2="20" y2="19"></line>
+                    </svg>
+                    <span class="sidebar-btn-label">Stream Feed</span>
+                </button>
+            </nav>
+
+            <!-- Bottom Toggle Hint / Expand Footer -->
+            <div class="sidebar-footer">
+                <button type="button" class="sidebar-expand-action-btn" id="sidebarBottomExpandBtn" title="Expand / Collapse Sidebar Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <polyline points="15 6 21 12 15 18"></polyline>
+                    </svg>
+                    <span class="sidebar-btn-label">Open Sidebar</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Header Bar -->
+            <header class="app-header">
+                <div class="header-brand">
+                    <div>
+                        <h2 class="brand-title">Competitor AI</h2>
+                        <span class="brand-caption">STRATEGIC INTELLIGENCE</span>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <div class="connection-status" id="serverStatusBadge">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Backend Active (Port 4545)</span>
+                    </div>
+                    <div class="user-profile-badge" id="userProfileBadge">
+                        <div class="user-avatar-small" id="userAvatarSmall">AI</div>
+                        <div class="user-info-text">
+                            <span class="user-name-display" id="userNameDisplay">Analyst</span>
+                            <span class="user-role-display">Verified Session</span>
+                        </div>
+                    </div>
+                    <button class="btn-logout" id="logoutBtn" title="Sign Out">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        <span>Logout</span>
+                    </button>
+                    <button class="btn-ghost" id="exportJsonBtn" title="Export Full Report as JSON" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Export JSON
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Search / Hero Bar -->
+            <section class="search-hero">
+                <div class="eyebrow-ai-tag">
+                    <span class="pulse-dot"></span>
+                    <span>AUTONOMOUS RECON ENGINE / CRAWL4AI + GEMINI</span>
+                </div>
+                <h1 class="search-heading">Know your rivals <span class="accent-text">before they move.</span></h1>
+                <p class="search-desc">Instantaneous headless web crawling, market share decomposition, 3-tier rival mapping, multi-vector SWOT matrices, and battle-tested surpass playbooks.</p>
+
+                <form id="analysisForm" class="search-box">
+                    <div class="input-wrapper">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="url" id="targetUrlInput" placeholder="https://www.adidas.co.in or https://stripe.com" required autocomplete="off" value="https://www.adidas.co.in">
+                    </div>
+
+                    <div class="options-wrapper">
+                        <label class="toggle-label" title="Force fresh scraping even if analysis exists in cache">
+                            <input type="checkbox" id="forceUpdateToggle">
+                            <span class="toggle-text">Force Fresh Scrape</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" id="analyzeBtn" class="btn-primary">
+                        <span class="btn-text">Run intelligence scan</span>
+                        <span class="btn-icon">&rarr;</span>
+                        <div class="spinner" id="analyzeSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+
+                <!-- Quick Suggestion Chips -->
+                <div class="suggestion-chips">
+                    <span class="chips-label">Try:</span>
+                    <button type="button" class="chip" data-url="https://www.adidas.co.in">Adidas (Sports)</button>
+                    <button type="button" class="chip" data-url="https://www.nike.com">Nike (Global Athleisure)</button>
+                    <button type="button" class="chip" data-url="https://stripe.com">Stripe (Fintech Infrastructure)</button>
+                    <button type="button" class="chip" data-url="https://shopify.com">Shopify (E-Commerce)</button>
+                    <button type="button" class="chip" data-url="https://slack.com">Slack (Enterprise Collaboration)</button>
+                </div>
+
+                <!-- Section "What your report contains" -->
+                <div class="section-headline-row">
+                    <span class="section-label">01 / INTELLIGENCE SUITE</span>
+                    <h3 class="section-title">What your report contains</h3>
+                </div>
+
+                <div class="hero-features-grid">
+                    <div class="hero-feature-card">
+                        <div class="feature-top-row">
+                            <span class="feature-tag-mono">01 / CRAWL4AI</span>
+                            <span class="feature-stat-pill">99.98% Parse</span>
+                        </div>
+                        <h4>Headless Web Scraper</h4>
+                        <p>Autonomous multi-page extraction bypassing digital gatekeepers with zero footprint.</p>
+                    </div>
+
+                    <div class="hero-feature-card">
+                        <div class="feature-top-row">
+                            <span class="feature-tag-mono">02 / GEMINI 3.8</span>
+                            <span class="feature-stat-pill">Real-time</span>
+                        </div>
+                        <h4>Market Share Decomposition</h4>
+                        <p>Total addressable market calculus, sector growth vectors, and competitor positioning.</p>
+                    </div>
+
+                    <div class="hero-feature-card">
+                        <div class="feature-top-row">
+                            <span class="feature-tag-mono">03 / RADAR</span>
+                            <span class="feature-stat-pill">3-Tier Depth</span>
+                        </div>
+                        <h4>3-Tier Rival Radar</h4>
+                        <p>Direct local, national, and global competitor matrices with automated threat classification.</p>
+                    </div>
+
+                    <div class="hero-feature-card">
+                        <div class="feature-top-row">
+                            <span class="feature-tag-mono">04 / STRATEGY</span>
+                            <span class="feature-stat-pill">Actionable</span>
+                        </div>
+                        <h4>SWOT & Surpass Playbook</h4>
+                        <p>Granular 4-quadrant strategic matrices and offensive playbooks to capture rival market share.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Progress / Stepper Card (Visible during processing) -->
+            <section class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <div>
+                            <span class="progress-badge">LIVE SCAN</span>
+                            <h3 class="progress-step-title" id="currentStepText">Connecting to extraction pipeline...</h3>
+                        </div>
+                        <span class="progress-percent" id="progressPercent">10%</span>
+                    </div>
+
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBarFill" style="width: 10%;"></div>
+                    </div>
+
+                    <div class="pipeline-stepper">
+                        <div class="step-item active" id="step-crawl">
+                            <span class="step-circle">1</span>
+                            <span class="step-label">Web Scrape</span>
+                        </div>
+                        <div class="step-item" id="step-profile">
+                            <span class="step-circle">2</span>
+                            <span class="step-label">Profile</span>
+                        </div>
+                        <div class="step-item" id="step-market">
+                            <span class="step-circle">3</span>
+                            <span class="step-label">Market Intel</span>
+                        </div>
+                        <div class="step-item" id="step-competitors">
+                            <span class="step-circle">4</span>
+                            <span class="step-label">Competitors</span>
+                        </div>
+                        <div class="step-item" id="step-eval">
+                            <span class="step-circle">5</span>
+                            <span class="step-label">Evaluation</span>
+                        </div>
+                        <div class="step-item" id="step-swot">
+                            <span class="step-circle">6</span>
+                            <span class="step-label">SWOT</span>
+                        </div>
+                        <div class="step-item" id="step-strategy">
+                            <span class="step-circle">7</span>
+                            <span class="step-label">Playbook</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Error Banner -->
+            <div class="error-banner" id="errorBanner" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span id="errorMessage">Error details will appear here.</span>
+                <button class="btn-close" id="closeErrorBtn">&times;</button>
+            </div>
+
+            <!-- Dashboard Content Area (Visible after scan completes) -->
+            <main class="dashboard-content" id="dashboardContent" style="display: none;">
+                <!-- Navigation Tabs -->
+                <nav class="dashboard-tabs">
+                    <button class="tab-btn active" data-tab="tab-overview" id="tabBtnOverview">Company Overview</button>
+                    <button class="tab-btn" data-tab="tab-market" id="tabBtnMarket">Market & Share</button>
+                    <button class="tab-btn" data-tab="tab-competitors" id="tabBtnCompetitors">Competitor Landscape</button>
+                    <button class="tab-btn" data-tab="tab-swot" id="tabBtnSwot">SWOT Analysis</button>
+                    <button class="tab-btn" data-tab="tab-comparison" id="tabBtnComparison">Comparison Matrix</button>
+                    <button class="tab-btn" data-tab="tab-surpass" id="tabBtnSurpass">Surpass Strategy</button>
+                    <button class="tab-btn" data-tab="tab-logs" id="tabBtnLogs">Stream Feed</button>
+                </nav>
+
+                <!-- TAB 1: COMPANY OVERVIEW -->
+                <section class="tab-pane active" id="tab-overview">
+                    <div class="company-hero-card" id="companyHeroCard">
+                        <div class="company-hero-main">
+                            <div class="company-avatar" id="companyAvatar">AI</div>
+                            <div class="company-header-text">
+                                <div class="badge-row">
+                                    <span class="badge badge-primary" id="companyCategory">Category</span>
+                                    <span class="badge badge-neutral" id="companyLocation">Global</span>
+                                    <span class="badge badge-neutral" id="companyFounded">Founded -</span>
+                                </div>
+                                <h2 class="company-name" id="companyName">Analyzing Website...</h2>
+                                <p class="company-tagline" id="companyTagline"></p>
+                                <a href="#" target="_blank" class="company-link" id="companyLink">
+                                    <span id="companyLinkText">Visit Website</span> &rarr;
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="elevator-pitch-box" id="elevatorPitchBox" style="display: none;">
+                            <span class="pitch-label">Executive Summary / Elevator Pitch</span>
+                            <p id="elevatorPitchText"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid-two-col">
+                        <div class="content-card">
+                            <span class="card-top-tag">01 / CAPABILITIES</span>
+                            <h4 class="card-title">Core Products & Services</h4>
+                            <div class="pill-list" id="coreServicesList">
+                                <span class="empty-state">Waiting for data...</span>
+                            </div>
+                        </div>
+
+                        <div class="content-card">
+                            <span class="card-top-tag">02 / DEMOGRAPHICS</span>
+                            <h4 class="card-title">Target Industries & Demographics</h4>
+                            <div class="pill-list" id="targetIndustriesList">
+                                <span class="empty-state">Waiting for data...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-two-col" style="margin-top: 18px;">
+                        <div class="content-card">
+                            <span class="card-top-tag">03 / STACK</span>
+                            <h4 class="card-title">Technology & Infrastructure Stack</h4>
+                            <div class="badge-wrap" id="techStackList">
+                                <span class="empty-state">Waiting for data...</span>
+                            </div>
+                        </div>
+
+                        <div class="content-card">
+                            <span class="card-top-tag">04 / LEADERSHIP</span>
+                            <h4 class="card-title">Corporate Leadership & Highlights</h4>
+                            <div id="companyMetaDetails">
+                                <span class="empty-state">Waiting for data...</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: MARKET & SHARE -->
+                <section class="tab-pane" id="tab-market">
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <span class="kpi-label">01 / TOTAL MARKET SIZE</span>
+                            <h3 class="kpi-value" id="marketSizeValue">--</h3>
+                            <span class="kpi-sub" id="marketSector">Industry Sector</span>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-label">02 / MARKET GROWTH (CAGR)</span>
+                            <h3 class="kpi-value positive" id="marketGrowthRate">--</h3>
+                            <span class="kpi-sub" id="growthPeriod">Projected Horizon</span>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-label">03 / EST. MARKET CAPTURE</span>
+                            <h3 class="kpi-value highlight" id="marketCaptureValue">--</h3>
+                            <span class="kpi-sub">Estimated Addressable Capture</span>
+                        </div>
+                        <div class="kpi-card">
+                            <span class="kpi-label">04 / COMPETITIVE STANCE</span>
+                            <h3 class="kpi-value" id="marketPositionValue">--</h3>
+                            <span class="kpi-sub">Current Market Standing</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-two-col">
+                        <div class="content-card">
+                            <span class="card-top-tag">DRIVERS</span>
+                            <h4 class="card-title">Key Industry Drivers</h4>
+                            <ul class="styled-bullet-list" id="marketDriversList">
+                                <li>Waiting for market data...</li>
+                            </ul>
+                        </div>
+                        <div class="content-card">
+                            <span class="card-top-tag">GEOGRAPHY</span>
+                            <h4 class="card-title">Major Geographic Regions</h4>
+                            <div class="pill-list" id="marketRegionsList">
+                                <span>Waiting for market data...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid-two-col" style="margin-top: 18px;">
+                        <div class="content-card">
+                            <span class="card-top-tag">OPPORTUNITIES</span>
+                            <h4 class="card-title">Growth Opportunities</h4>
+                            <ul class="styled-bullet-list" id="growthOpportunitiesList">
+                                <li>Waiting for market data...</li>
+                            </ul>
+                        </div>
+                        <div class="content-card">
+                            <span class="card-top-tag">THREATS</span>
+                            <h4 class="card-title">Industry Challenges & Threats</h4>
+                            <ul class="styled-bullet-list" id="industryChallengesList">
+                                <li>Waiting for market data...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="content-card" style="margin-top: 18px;">
+                        <span class="card-top-tag">TELEMETRY</span>
+                        <h4 class="card-title">Market News & Intelligence Snippets (SerpAPI)</h4>
+                        <p class="news-text" id="marketNewsSummary">No news fetched yet.</p>
+                    </div>
+                </section>
+
+                <!-- TAB 3: COMPETITOR LANDSCAPE -->
+                <section class="tab-pane" id="tab-competitors">
+                    <div class="competitor-tier-section">
+                        <div class="tier-header">
+                            <div>
+                                <span class="card-top-tag">TIER 01 / DIRECT</span>
+                                <h3 class="tier-title">Direct Competitors (Deep Evaluation)</h3>
+                            </div>
+                            <span class="badge badge-primary">Deep Scan</span>
+                        </div>
+                        <div class="competitor-cards-grid" id="localCompetitorsGrid">
+                            <div class="empty-state">Evaluating competitors...</div>
+                        </div>
+                    </div>
+
+                    <div class="competitor-tier-section">
+                        <div class="tier-header">
+                            <div>
+                                <span class="card-top-tag">TIER 02 / NATIONAL</span>
+                                <h3 class="tier-title">National Competitors</h3>
+                            </div>
+                            <span class="badge badge-neutral">National</span>
+                        </div>
+                        <div class="competitor-cards-grid" id="nationalCompetitorsGrid">
+                            <div class="empty-state">Waiting for competitor extraction...</div>
+                        </div>
+                    </div>
+
+                    <div class="competitor-tier-section">
+                        <div class="tier-header">
+                            <div>
+                                <span class="card-top-tag">TIER 03 / GLOBAL</span>
+                                <h3 class="tier-title">Global Competitors</h3>
+                            </div>
+                            <span class="badge badge-neutral">Global Scale</span>
+                        </div>
+                        <div class="competitor-cards-grid" id="globalCompetitorsGrid">
+                            <div class="empty-state">Waiting for competitor extraction...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: SWOT TILES -->
+                <section class="tab-pane" id="tab-swot">
+                    <div class="swot-grid">
+                        <!-- Strengths (bg #1A2610, text --accent) -->
+                        <div class="swot-box swot-strengths">
+                            <div class="swot-header">
+                                <span class="swot-letter">S</span>
+                                <div>
+                                    <h3 class="swot-title">Strengths</h3>
+                                    <span class="swot-subtitle">INTERNAL ADVANTAGES</span>
+                                </div>
+                            </div>
+                            <ul class="swot-list" id="swotStrengthsList">
+                                <li>Awaiting SWOT synthesis...</li>
+                            </ul>
+                        </div>
+
+                        <!-- Weaknesses (bg --danger-bg, text --danger) -->
+                        <div class="swot-box swot-weaknesses">
+                            <div class="swot-header">
+                                <span class="swot-letter">W</span>
+                                <div>
+                                    <h3 class="swot-title">Weaknesses</h3>
+                                    <span class="swot-subtitle">INTERNAL GAPS</span>
+                                </div>
+                            </div>
+                            <ul class="swot-list" id="swotWeaknessesList">
+                                <li>Awaiting SWOT synthesis...</li>
+                            </ul>
+                        </div>
+
+                        <!-- Opportunities (bg #1D1840, text --ai-soft) -->
+                        <div class="swot-box swot-opportunities">
+                            <div class="swot-header">
+                                <span class="swot-letter">O</span>
+                                <div>
+                                    <h3 class="swot-title">Opportunities</h3>
+                                    <span class="swot-subtitle">EXTERNAL EXPANSION</span>
+                                </div>
+                            </div>
+                            <ul class="swot-list" id="swotOpportunitiesList">
+                                <li>Awaiting SWOT synthesis...</li>
+                            </ul>
+                        </div>
+
+                        <!-- Threats (bg --warn-bg, text --warn) -->
+                        <div class="swot-box swot-threats">
+                            <div class="swot-header">
+                                <span class="swot-letter">T</span>
+                                <div>
+                                    <h3 class="swot-title">Threats</h3>
+                                    <span class="swot-subtitle">EXTERNAL RISKS</span>
+                                </div>
+                            </div>
+                            <ul class="swot-list" id="swotThreatsList">
+                                <li>Awaiting SWOT synthesis...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 5: COMPARISON MATRIX -->
+                <section class="tab-pane" id="tab-comparison">
+                    <div class="content-card">
+                        <span class="card-top-tag">BENCHMARK MATRIX</span>
+                        <h3 class="card-title">Side-by-Side Competitive Benchmark</h3>
+                        <p class="card-subtitle">Comprehensive feature, capability, and market positioning comparison</p>
+                        <div class="table-responsive" id="comparisonTableContainer">
+                            <div class="empty-state">Waiting for comparison matrix generation...</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 6: SURPASS STRATEGY -->
+                <section class="tab-pane" id="tab-surpass">
+                    <div class="strategy-banner">
+                        <span class="card-top-tag">TACTICAL PLAYBOOK</span>
+                        <h3>Actionable Surpass Blueprint</h3>
+                        <p>High-impact initiatives engineered to disrupt competitors, capture market share, and consolidate market leadership.</p>
+                    </div>
+
+                    <div class="strategy-cards-container" id="surpassStrategiesContainer">
+                        <div class="empty-state">Waiting for strategic recommendations...</div>
+                    </div>
+                </section>
+
+                <!-- TAB 7: STREAM FEED / RAW LOGS -->
+                <section class="tab-pane" id="tab-logs">
+                    <div class="terminal-card">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot amethyst"></span>
+                                <span class="dot amber"></span>
+                                <span class="dot orange"></span>
+                            </div>
+                            <span class="terminal-title">Server-Sent Events (SSE) Live Feed</span>
+                            <button class="btn-terminal-clear" id="clearLogsBtn">Clear Feed</button>
+                        </div>
+                        <div class="terminal-body" id="eventTerminalBody">
+                            <div class="log-line info">Waiting for analysis session...</div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Empty State Prompt (shown initially before search) -->
+            <div class="initial-empty-state" id="initialEmptyState">
+                <div class="empty-card">
+                    <div class="empty-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Intelligence Terminal Standing By</h3>
+                    <p>Enter any company website above and run the intelligence scan to trigger Crawl4AI extraction, market share calculus, SWOT matrices, and battle-tested surpass tactics.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Application Logic -->
+    <script src="/static/app.js?v=3"></script>
+</body>
+</html>

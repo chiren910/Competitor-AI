@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+crawl4ai
+langchain
+google-generativeai
+pydantic
+langchain_community
+langchain-google-genai
+playwright
+supabase
+sse-starlette
+serpapi
+google-search-results
+python-dotenv
+requests
+pytest
+httpx
